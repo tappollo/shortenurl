@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class UrlshortenerApplication
+class UrlShortenerApplication
 
 fun main(args: Array<String>) {
-	runApplication<UrlshortenerApplication>(*args)
+	runApplication<UrlShortenerApplication>(*args)
 }
