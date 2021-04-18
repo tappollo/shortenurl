@@ -2,6 +2,7 @@ package com.tappollo.urlshortener.shorten.service
 
 import com.tappollo.urlshortener.shorten.entity.UrlConfig
 import com.tappollo.urlshortener.shorten.repository.ShortenUrlRepository
+import com.tappollo.urlshortener.utils.exception.IncorrectUrlException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.net.URL
@@ -12,9 +13,14 @@ class ShortenService(
     private val shortenUrlRepository: ShortenUrlRepository
 ) {
 
+    @Throws(IncorrectUrlException::class)
     fun shortenUrl(url: String): String {
-        val uri = URL(url).toURI()
-        return shortenUrlRepository.saveUrl(uri).toString()
+        return try {
+            val uri = URL(url).toURI()
+            shortenUrlRepository.saveUrl(uri).toString()
+        } catch (e: Exception) {
+            throw IncorrectUrlException()
+        }
     }
 
     fun getAllUrls(): List<UrlConfig> = shortenUrlRepository.getAllUrls()

@@ -3,6 +3,7 @@ package com.tappollo.urlshortener.shorten.service
 import com.nhaarman.mockitokotlin2.*
 import com.tappollo.urlshortener.shorten.entity.UrlConfig
 import com.tappollo.urlshortener.shorten.repository.ShortenUrlRepository
+import com.tappollo.urlshortener.utils.exception.IncorrectUrlException
 import io.kotlintest.shouldBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -32,7 +33,7 @@ class ShortenServiceTest {
     fun `Incorrect url should be handled properly`() {
         val shortenService = ShortenService(mock())
 
-        assertThrows<MalformedURLException> {
+        assertThrows<IncorrectUrlException> {
             shortenService.shortenUrl("htasdfasfm")
         }
     }

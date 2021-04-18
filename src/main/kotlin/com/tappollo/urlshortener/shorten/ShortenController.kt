@@ -5,6 +5,7 @@ import com.tappollo.urlshortener.api.ShortenUrlRequest
 import com.tappollo.urlshortener.api.ShortenUrlResponse
 import com.tappollo.urlshortener.shorten.mappers.toResponse
 import com.tappollo.urlshortener.shorten.service.ShortenService
+import com.tappollo.urlshortener.utils.exception.IncorrectUrlException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -23,16 +24,8 @@ class ShortenController(
 
     @PostMapping("shorten")
     fun shortenUrl(@RequestBody body: ShortenUrlRequest): ResponseEntity<ShortenUrlResponse> {
-        return try {
-            val shortenUrl = service.shortenUrl(body.url)
-            ResponseEntity(ShortenUrlResponse(shortenUrl), HttpStatus.OK)
-        } catch (e: Exception) {
-            if (e is URISyntaxException) {
-                ResponseEntity(HttpStatus.BAD_REQUEST)
-            } else {
-                ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
-            }
-        }
+        val shortenUrl = service.shortenUrl(body.url)
+        return ResponseEntity(ShortenUrlResponse(shortenUrl), HttpStatus.OK)
     }
 
     @GetMapping("shorten/all")
@@ -51,7 +44,7 @@ class ShortenController(
     fun handleNotFoundException() {
     }
 
-    @ExceptionHandler(URISyntaxException::class, MalformedURLException::class)
+    @ExceptionHandler(IncorrectUrlException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleUriSyntaxException() {
     }
