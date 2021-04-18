@@ -1,10 +1,7 @@
 package com.tappollo.urlshortener.shorten.entity
 
-import java.net.URI
-import java.time.LocalDateTime
-
 class UrlConfig(
-    val shortenUrl: URI,
+    val shortenUrl: String,
     val targetUrl: String,
-    val createdAt: LocalDateTime
+    val createdAt: Long
 )

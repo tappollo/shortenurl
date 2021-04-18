@@ -53,9 +53,9 @@ private fun UrlConfigEntity.toUrlConfig(domainConfig: DomainConfig): UrlConfig {
     val innerId = id ?: throw IllegalStateException("Id cannot be null!")
 
     return UrlConfig(
-        URI.create("${domainConfig.domain}/${UrlShortener.encode(innerId)}"),
+        "${domainConfig.domain}/${UrlShortener.encode(innerId)}",
         targetUrl,
-        createdAt.toLocalDateTime()
+        createdAt
     )
 
 }
