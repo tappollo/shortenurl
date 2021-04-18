@@ -1,5 +1,6 @@
 package com.tappollo.urlshortener.shorten.dao
 
+import io.kotlintest.shouldBe
 import org.junit.Assert
 import org.junit.jupiter.api.Test
 import org.junit.runner.RunWith
@@ -19,7 +20,7 @@ class UrlConfigEntityDaoTest(
     @Test
     @Transactional
     @Rollback(true)
-    fun testInsertUrlConfig() {
+    fun `Save entity should be handled properly`() {
         val entity = UrlConfigEntity("http://localhost", 1L)
 
         val saved = urlConfigDao.save(entity)
@@ -34,22 +35,24 @@ class UrlConfigEntityDaoTest(
     @Test
     @Transactional
     @Rollback(true)
-    fun testFindByUrl() {
+    fun `Find by url should return exist url config`() {
         val entity = UrlConfigEntity("http://localhost", 1L)
 
         val saved = urlConfigDao.save(entity)
 
-        val findByUrl = urlConfigDao.findByUrl("http://localhost")
+        val optional = urlConfigDao.findByUrl("http://localhost")
 
-        Assert.assertEquals(findByUrl?.targetUrl, saved.targetUrl)
-        Assert.assertEquals(findByUrl?.createdAt, saved.createdAt)
-        Assert.assertEquals(findByUrl?.id, saved.id)
+        optional.isPresent shouldBe true
+        val findByUrl = optional.get()
+        Assert.assertEquals(findByUrl.targetUrl, saved.targetUrl)
+        Assert.assertEquals(findByUrl.createdAt, saved.createdAt)
+        Assert.assertEquals(findByUrl.id, saved.id)
     }
 
     @Test
     @Transactional
     @Rollback(true)
-    fun findById() {
+    fun `Find by id should return exis url config`() {
         val entity = UrlConfigEntity("http://localhost", 1L)
 
         val saved = urlConfigDao.save(entity)
@@ -68,7 +71,7 @@ class UrlConfigEntityDaoTest(
     @Test
     @Transactional
     @Rollback(true)
-    fun delete() {
+    fun `Delete should be handled properly`() {
         val entity = UrlConfigEntity("http://localhost", 1L)
 
         val saved = urlConfigDao.save(entity)

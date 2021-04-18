@@ -28,6 +28,11 @@ dependencies {
         exclude(group = "junit", module = "junit")
     }
     testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
+    testImplementation("org.mockito:mockito-core:3.2.4")
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0") {
+        exclude(group = "org.mockito", module = "mockito-core")
+    }
+    testImplementation("io.kotlintest:kotlintest-runner-junit4:3.4.2")
 }
 
 tasks.withType<KotlinCompile> {

@@ -3,9 +3,10 @@ package com.tappollo.urlshortener.shorten.dao
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.CrudRepository
 import org.springframework.data.repository.query.Param
+import java.util.*
 
 interface UrlConfigDao : CrudRepository<UrlConfigEntity, Int> {
 
     @Query("from url_config where targetUrl=:targetUrl")
-    fun findByUrl(@Param("targetUrl") targetUrl: String): UrlConfigEntity?
+    fun findByUrl(@Param("targetUrl") targetUrl: String): Optional<UrlConfigEntity>
 }

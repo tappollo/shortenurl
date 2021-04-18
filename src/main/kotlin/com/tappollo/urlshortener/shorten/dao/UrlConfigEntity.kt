@@ -3,7 +3,7 @@ package com.tappollo.urlshortener.shorten.dao
 import javax.persistence.*
 
 @Entity(name = "url_config")
-class UrlConfigEntity(
+data class UrlConfigEntity(
     @Column(name = "target_url")
     val targetUrl: String,
     @Column(name = "created_at")
