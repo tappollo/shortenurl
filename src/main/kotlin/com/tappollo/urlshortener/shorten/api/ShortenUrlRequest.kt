@@ -1,4 +1,4 @@
-package com.tappollo.urlshortener.api
+package com.tappollo.urlshortener.shorten.api
 
 import com.fasterxml.jackson.annotation.JsonGetter
 

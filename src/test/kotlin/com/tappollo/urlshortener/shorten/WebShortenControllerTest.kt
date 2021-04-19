@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.doThrow
 import com.nhaarman.mockitokotlin2.whenever
-import com.tappollo.urlshortener.api.ShortenUrlRequest
-import com.tappollo.urlshortener.api.ShortenUrlResponse
+import com.tappollo.urlshortener.shorten.api.ShortenUrlRequest
+import com.tappollo.urlshortener.shorten.api.ShortenUrlResponse
 import com.tappollo.urlshortener.shorten.entity.UrlConfig
 import com.tappollo.urlshortener.shorten.mappers.toResponse
 import com.tappollo.urlshortener.shorten.service.ShortenService
